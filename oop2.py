@@ -1,4 +1,5 @@
 import numpy as np
+import sys
 
 def fastread (arquivoPath):
 	
@@ -67,18 +68,24 @@ def filtro_estados(dados, filtro, valor):
 	return ( list ( filter ( lambda x: x[colunaEstados] == valor , dados) ))
 	
 
-#def filtro_especie():
-#def filtro_ameaca():
-	
-filename = "portalbio_export_16-10-2019-14-39-54.csv"
-dados = fastread(filename)
-transposta = transpose(dados)
-#print(meanlimpa(transposta))
-#print(nivel_tax(dados))
+#def localidade():
 
-filtro  = input("filtro: (estado/especie/ameaca) ")
-valor = input("valor: ")
-print(filtro_estados(dados,filtro,valor))
+
+
+if __name__ == "__main__":
+	
+	filename = "portalbio_export_16-10-2019-14-39-54.csv"
+	dados = fastread(filename)
+	transposta = transpose(dados)
+	#print(meanlimpa(transposta))
+	#print(nivel_tax(dados))
+	
+	#filtro  = input("filtro: (estado/especie/ameaca) ")
+	#valor = input("valor: ")
+	#print(filtro_estados(dados,filtro,valor))
+
+	
+	
 
 
 
