@@ -50,7 +50,7 @@ def tax_level(dados):
 		aux[i] = dados[0][ind]
 	return aux
 
-def filtro_estados(dados, filtro, valor):
+def filters(dados, filtro, valor):
 	colunaEstados =  dados[0].index(filtro)
 
 	return ( list ( filter ( lambda x: x[colunaEstados] == valor , dados) ))
@@ -66,11 +66,13 @@ if __name__ == "__main__":
 	data = read_file(filename)
 	transpost = transpose(data)
 	#print(mean_empty(transpost))
-	print(tax_level(data))
+	#print(tax_level(data))
 	
-	#filtro  = input("filtro: (estado/especie/ameaca) ")
-	#valor = input("valor: ")
-	#print(filtro_estados(data,filtro,valor))
+
+	# Exemplo : Filtro "Estado/Provincia" Valor: PE
+	#filtertype  = input("filter: (estado/especie/ameaca) ")
+	#value = input("valor: ")
+	#print(filters(data,filtertype,value))
 
 	
 	
