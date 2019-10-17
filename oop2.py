@@ -1,5 +1,8 @@
 import numpy as np
-import sys
+from opencage.geocoder import OpenCageGeocode
+
+key = '09aadb1b1d8840acacfa0fcece0acb13'
+geocoder = OpenCageGeocode(key)
 
 def read_file (arquivoPath):
 	
@@ -73,6 +76,7 @@ if __name__ == "__main__":
 	#filtertype  = input("filter: (estado/especie/ameaca) ")
 	#value = input("valor: ")
 	#print(filters(data,filtertype,value))
+	print(geocoder.reverse_geocode(44,-1))
 
 	
 	
