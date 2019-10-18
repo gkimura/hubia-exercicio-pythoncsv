@@ -1,6 +1,8 @@
 import numpy as np
 from opencage.geocoder import OpenCageGeocode
 
+
+from pprint import pprint
 key = '09aadb1b1d8840acacfa0fcece0acb13'
 geocoder = OpenCageGeocode(key)
 
@@ -58,8 +60,51 @@ def filters(data, filtertype, value):
 	return ( list ( filter ( lambda x: x[column] == value , data) ))
 	
 
-#def localidade():
+def get_city_state(json):	
+	res = json[0]['components']
+	print ([y for x,y in res.items()])
+	return res["city"], res["state"], res["state_code"]
 
+def get_elements_geo(json):	
+	res = json[0]['components']
+	return [y for x,y in res.items()]
+	 
+
+def localidade(data):
+	global geocoder
+
+	latlon = data[0].index("Latitude")
+	cityind = data[0].index("Municipio")
+
+	aux = []
+	for line in data[1:20]:
+		lat = parseFloat(line[latlon])
+		lon = parseFloat(line[latlon+1])
+				
+		json = geocoder.reverse_geocode(lat,lon)		
+		#city,state,state_code = get_city_state(json)
+		#aux.append(city == line[cityind])
+
+
+		aux.append ( line[cityind] in get_elements_geo(json) )
+	
+
+	print(aux[:10])
+
+
+	
+
+
+			
+		
+def parseFloat(string):
+	valor = 0.00	
+	try:
+		valor = float(string)
+	except TypeError:
+		valor = 0
+	
+	return valor	
 
 
 if __name__ == "__main__":
@@ -76,10 +121,18 @@ if __name__ == "__main__":
 	value = input("valor: ")
 	print(filters(data,filtertype,value))
 	"""
-	print(geocoder.reverse_geocode(44,-1))
+	
+
+	#a = geocoder.reverse_geocode(-25.4541639,-49.2537428)
+
+
+
+
+
+	localidade(data)	
 
 	
-	
+
 
 
 
