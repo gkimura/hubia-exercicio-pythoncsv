@@ -38,25 +38,24 @@ def mean_empty(dataFrame):
 def transpose(dataFrame):
 	return np.matrix(dataFrame).transpose().tolist()
 
-def tax_init_end(dados):
-	return dados[0].index("Filo"), dados[0].index("Especie")
+def tax_init_end(data):
+	return data[0].index("Filo"), data[0].index("Especie")
 
-def tax_level(dados):
+def tax_level(data):
 	aux = {}
-	init,fim = tax_init_end(dados)	
-	print(init,fim)
-	for i, line in enumerate(dados):
-		for ind in range(init,fim+1):
+	init,end = tax_init_end(data)	
+	print(init,end)
+	for i, line in enumerate(data):
+		for ind in range(init,end+1):
 			if isEmpty(line[ind]):
-				aux[i]= dados[0][ind-1]
+				aux[i]= data[0][ind-1]
 				break 
-		aux[i] = dados[0][ind]
+		aux[i] = data[0][ind]
 	return aux
 
-def filters(dados, filtro, valor):
-	colunaEstados =  dados[0].index(filtro)
-
-	return ( list ( filter ( lambda x: x[colunaEstados] == valor , dados) ))
+def filters(data, filtertype, value):
+	column =  data[0].index(filtertype)
+	return ( list ( filter ( lambda x: x[column] == value , data) ))
 	
 
 #def localidade():
@@ -68,14 +67,15 @@ if __name__ == "__main__":
 	filename = "portalbio_export_16-10-2019-14-39-54.csv"
 	data = read_file(filename)
 	transpost = transpose(data)
-	#print(mean_empty(transpost))
-	#print(tax_level(data))
-	
+	""" 
+	print(mean_empty(transpost))
+	print(tax_level(data))
 
 	# Exemplo : Filtro "Estado/Provincia" Valor: PE
-	#filtertype  = input("filter: (estado/especie/ameaca) ")
-	#value = input("valor: ")
-	#print(filters(data,filtertype,value))
+	filtertype  = input("filter: (estado/especie/ameaca) ")
+	value = input("valor: ")
+	print(filters(data,filtertype,value))
+	"""
 	print(geocoder.reverse_geocode(44,-1))
 
 	
